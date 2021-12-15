@@ -1,0 +1,37 @@
+
+@model Category
+
+<div class="text-center row mx-auto">
+    <h2 class="col-4 border-right text-right"><a href="/Products">Products</a></h2>
+    <h2 class="col-4 text-left">Categories</h2>
+</div>
+
+<div class="text-center row mx-auto">
+    <div class="col-4 border-right">
+        <h2>New Category</h2>
+        <form action="AddCategory" method="post">
+            <div class="form-group row">
+                <label for="Name" class="col-sm-3 col-form-label text-left">Name</label>
+                <div class="col">
+                    <input asp-for="Name" class="form-control">
+                </div>
+            </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <div class="col-4">
+        <h2>Existing Categories</h2>
+
+        @{
+            foreach(Category c in ViewBag.AllCategories)
+            {
+                <div class="text-left">
+                    <h5><a href="/Categories/@c.CategoryId">@c.Name</a></h5>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Product
+
+<div class="text-center row mx-auto">
+    <h2 class="col-4 border-right text-right">Products</h2>
+    <h2 class="col-4 text-left"> <a href="/Categories">Categories</a></h2>
+</div>
+
+<div class="text-center row mx-auto">
+    <div class="col-4 border-right">
+        <h2>New Product</h2>
+        <form action="AddProduct" method="post">
+            <div class="form-group row">
+                <label for="Name" class="col-sm-3 col-form-label text-left">Name</label>
+                <div class="col">
+                    <input asp-for="Name" class="form-control">
+                </div>
+            </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="form-group row">
+                <label for="Description" class="col-sm-3 col-form-label text-left">Description</label>
+                <div class="col">
+                    <input asp-for="Description" class="form-control">
+                </div>
+            </div>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            <div class="form-group row">
+                <label for="Price" class="col-sm-3 col-form-label text-left">Price</label>
+                <div class="col">
+                    <input asp-for="Price" type="number" min="0.00" step="0.01" class="form-control">
+                </div>
+            </div>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <div class="col-4">
+        <h2>Existing Products</h2>
+
+        @{
+            foreach(Product p in ViewBag.allProducts)
+            {
+                <div class="text-left">
+                    <h5><a href="/Products/@p.ProductId">@p.Name</a></h5>
+                </div>
+            }
+        }
+    </div>
+</div>
